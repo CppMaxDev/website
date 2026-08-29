@@ -1,0 +1,51 @@
+---
+const title = 'CppMax';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="CppMax website" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <main>
+      <h1>Hello, world!</h1>
+      <p>Welcome to {title}, powered by Astro.</p>
+    </main>
+  </body>
+</html>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(body) {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    color: #172033;
+    background: #f7f8fc;
+  }
+
+  main {
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(3rem, 10vw, 6rem);
+  }
+
+  p {
+    margin: 1rem 0 0;
+    font-size: 1.25rem;
+  }
+</style>
