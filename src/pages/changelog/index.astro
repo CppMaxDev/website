@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+
+<Layout title="Changelog | cppMax" description="Changes to the current cppMax beta.">
+  <PageHero
+    eyebrow="Current beta"
+    title="Changelog"
+    description="Release notes will appear here as new cppMax beta builds are prepared."
+  />
+  <section class="section">
+    <div class="shell placeholder">
+      <p class="eyebrow">Coming later</p>
+      <h2>No entries yet.</h2>
+      <p>This page is ready for the first dated beta release note.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .placeholder { max-width: 760px; }
+  .placeholder h2 { font-size: clamp(2.5rem, 5vw, 5rem); }
+</style>
