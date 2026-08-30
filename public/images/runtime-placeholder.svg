@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">cppMax runtime placeholder</title><desc id="desc">Illustrative compiler and runtime output.</desc>
+  <rect width="1200" height="900" fill="#c8ff62"/><rect x="88" y="82" width="1024" height="736" rx="24" fill="#111412"/>
+  <text x="132" y="145" fill="#f4f1e9" font-family="ui-monospace,monospace" font-size="20" font-weight="700">BUILD OUTPUT</text><circle cx="1055" cy="137" r="9" fill="#c8ff62"/><line x1="88" y1="180" x2="1112" y2="180" stroke="#363b37"/>
+  <g font-family="ui-monospace,monospace" font-size="20"><text x="136" y="242" fill="#76817a">[1/4]</text><text x="225" y="242" fill="#f4f1e9">clang++ -c main.cpp</text><text x="136" y="292" fill="#76817a">[2/4]</text><text x="225" y="292" fill="#f4f1e9">clang++ -c parser.cpp</text><text x="136" y="342" fill="#76817a">[3/4]</text><text x="225" y="342" fill="#f4f1e9">ld.lld -o benchmark</text><text x="136" y="392" fill="#76817a">[4/4]</text><text x="225" y="392" fill="#f4f1e9">sha256 + local signature</text></g>
+  <rect x="132" y="458" width="936" height="1" fill="#363b37"/><text x="136" y="518" fill="#c8ff62" font-family="ui-monospace,monospace" font-size="20">arm64 ELF ready</text><text x="136" y="563" fill="#9da59f" font-family="ui-monospace,monospace" font-size="18">Signed locally. Run count is unlimited.</text>
+  <rect x="136" y="628" width="928" height="120" rx="10" fill="#080a09"/><text x="170" y="677" fill="#76817a" font-family="ui-monospace,monospace" font-size="18">$ ./benchmark</text><text x="170" y="718" fill="#f4f1e9" font-family="ui-monospace,monospace" font-size="18">Parsed 10,000 files in 1.42s</text>
+  <text x="89" y="865" fill="#344119" font-family="ui-monospace,monospace" font-size="16">ILLUSTRATIVE BETA INTERFACE / REPLACE WITH APP SCREENSHOT</text>
+</svg>

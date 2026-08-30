@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+<Layout title="Beta pricing | cppMax" description="What is free in the cppMax beta and how envTokens are planned to work after beta.">
+  <PageHero eyebrow="Pricing" title="The beta costs nothing." description="Editing and compiling are free now and are planned to stay free. Automatic executable signing is also free while cppMax is in beta." />
+
+  <section class="section"><div class="shell price-layout">
+    <article class="current-price"><span class="tag">Available now</span><div class="price"><strong>€0</strong><span>during beta</span></div><h2>Everything needed to test cppMax.</h2><ul><li>Editor and file tools</li><li>LLVM, Clang, and LLD</li><li>Git and most of CMake</li><li>Automatic ELF signing</li><li>Unlimited runs of signed builds</li></ul><a class="button blue" href="/support/#beta-access">Get beta access</a></article>
+    <aside><p class="eyebrow">A note on beta pricing</p><p>cppMax is still testing the runtime, editor, and product model. Charging for automatic signing during that work would be hard to justify, so the beta plan is free.</p><p>The post-beta numbers below are the current plan, not a final offer.</p></aside>
+  </div></section>
+
+  <section class="after-beta"><div class="shell"><p class="eyebrow">Current post-beta plan</p><div class="after-heading"><h2>Choose tokens or skip them.</h2><p>Both routes use the same editor and compiler. The difference is how new ELF builds get signed.</p></div><div class="options">
+    <article><span class="number">01</span><h3>Use envTokens</h3><p class="option-price">Free with ads</p><p>Watch an ad to earn tokens. A standard ELF is planned to use one. A future graphical program is planned to use two.</p><p>Tokens can be saved before going offline.</p></article>
+    <article><span class="number">02</span><h3>Remove the token step</h3><p class="option-price">€3.99</p><p>Subscribe or prepay. cppMax signs new builds automatically, with no ads and no token balance to manage.</p><p>The prepaid option is intended for long periods offline.</p></article>
+  </div></div></section>
+
+  <section class="section"><div class="shell signing"><div><p class="eyebrow">One point worth knowing</p><h2>Running a signed build is free.</h2></div><p>A token signs an ELF based on its SHA-256 hash. It does not buy a single run. Keep the executable unchanged and run it as often as you want.</p></div></section>
+  <section class="section-sm"><div class="shell note"><p>Post-beta prices, token costs, ad availability, and prepaid terms may change before the public release.</p></div></section>
+</Layout>
+<style>
+  .price-layout { display: grid; grid-template-columns: 1.25fr .75fr; gap: 80px; align-items: start; }
+  .current-price { padding: 48px; color: white; background: var(--blue); }
+  .current-price .tag { color: var(--acid); }
+  .price { display: flex; align-items: end; gap: 18px; margin: 58px 0 30px; }
+  .price strong { font-size: clamp(5rem,12vw,9rem); line-height: .75; letter-spacing: -.08em; }
+  .price span { color: #dce3ff; font-weight: 700; }
+  .current-price h2 { max-width: 700px; }
+  .current-price ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; margin: 45px 0; padding: 0; list-style: none; }
+  .current-price li { padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.25); color: #edf0ff; }
+  .current-price li::before { content: '✓'; margin-right: 12px; color: var(--acid); }
+  .current-price .button { border-color: white; color: var(--blue); background: white; }
+  .price-layout aside { padding-top: 20px; }
+  .after-beta { padding: 110px 0; background: var(--paper-2); }
+  .after-heading { display: grid; grid-template-columns: 1.2fr .8fr; gap: 70px; align-items: end; }
+  .after-heading h2, .after-heading p { margin-bottom: 0; }
+  .options { display: grid; grid-template-columns: 1fr 1fr; margin-top: 60px; border-top: 1px solid var(--line); }
+  .options article { padding: 40px; border-bottom: 1px solid var(--line); }
+  .options article:first-child { border-right: 1px solid var(--line); }
+  .options h3 { font-size: 2rem; }
+  .option-price { color: var(--ink); font-size: 2rem; font-weight: 800; }
+  .signing { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; }
+  .signing h2, .signing p { margin: 0; }
+  @media (max-width: 760px) { .price-layout, .after-heading, .options, .signing { grid-template-columns: 1fr; gap: 42px; } .current-price { padding: 30px; } .current-price ul { grid-template-columns: 1fr; } .options article:first-child { border-right: 0; } }
+</style>

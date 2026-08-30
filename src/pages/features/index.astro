@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+<Layout title="What works | cppMax" description="The tools and limits in the current cppMax beta.">
+  <PageHero eyebrow="Current beta" title="What you can build with today." description="This is the shipping beta checklist. Planned v1 features are kept separate so you know what you are signing up to test." />
+
+  <section class="section"><div class="shell overview">
+    <div><p class="eyebrow">The short version</p><h2>A local C++ project can go from Git clone to running ELF without leaving cppMax.</h2></div>
+    <div><p>Use tabs and the file browser to edit a project. Configure most CMake builds. Compile with Clang and LLD, sign the executable, and run it through the cppMax AArch64 interpreter.</p><p>The editor and debugger are still early. They do the basics, but they do not yet match a desktop IDE.</p></div>
+  </div></section>
+
+  <section class="section rule"><div class="shell feature-row">
+    <div><p class="eyebrow">Project work</p><h2>Files, tabs, Git, and CMake.</h2><ul><li>Open several source files in tabs</li><li>Browse and manage project files</li><li>Use full Git support</li><li>Configure most projects that use CMake</li></ul></div>
+    <figure><img src="/images/git-files-placeholder.svg" alt="Illustration of cppMax project files and Git tools" /><figcaption>Illustrative beta interface. Replace with product screenshot.</figcaption></figure>
+  </div></section>
+
+  <section class="section rule"><div class="shell tool-list">
+    <div class="tool-intro"><p class="eyebrow">Editor and debugging</p><h2>The basics are there.</h2><p>Useful today, but intentionally described as basic while the beta develops.</p></div>
+    <div class="tool-items">
+      <article><span>01</span><h3>C++ highlighting</h3><p>Basic syntax colors help you scan source files.</p></article>
+      <article><span>02</span><h3>Static analysis</h3><p>Basic diagnostics catch common issues before a build.</p></article>
+      <article><span>03</span><h3>Breakpoints</h3><p>Pause execution at simple breakpoints during a run.</p></article>
+      <article><span>04</span><h3>Console I/O</h3><p>Read and write through <code>std::iostream</code>.</p></article>
+    </div>
+  </div></section>
+
+  <section class="compiler-section"><div class="shell compiler-grid">
+    <div><p class="eyebrow">Compiler and runtime</p><h2>A real arm64 ELF comes out the other end.</h2><p>cppMax bundles a mostly complete LLVM, Clang, and LLD toolchain. The custom interpreter runs the result on iOS.</p><a class="text-link" href="/how-it-works/">Read how the runtime works</a></div>
+    <figure><img src="/images/runtime-placeholder.svg" alt="Illustration of cppMax compilation and runtime output" /><figcaption>Illustrative build output. Replace with product screenshot.</figcaption></figure>
+  </div></section>
+
+  <section class="section"><div class="shell limits">
+    <div><span class="tag">Current limit</span><h3>About 50 Linux system calls</h3><p>The virtual Linux layer supports a small, practical set today. Programs can read and create real files, but broad Linux compatibility is still in development.</p></div>
+    <div><span class="tag">Planned for v1</span><h3>OpenGL and deeper IDE tools</h3><p>The v1 plan includes OpenGL translation to Metal, better analysis and debugging, phone-as-keyboard pairing, and more customization.</p></div>
+  </div></section>
+  <section class="section-sm"><div class="shell cta-band"><h2>Want to test the current build?</h2><a class="button" href="/support/#beta-access">Beta access details</a></div></section>
+</Layout>
+<style>
+  .overview { display: grid; grid-template-columns: 1.2fr .8fr; gap: 80px; align-items: end; }
+  .overview h2 { margin: 0; }
+  .feature-row, .compiler-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; align-items: center; }
+  ul { margin: 32px 0 0; padding: 0; list-style: none; }
+  li { padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+  li::before { content: '→'; margin-right: 15px; color: var(--blue); }
+  figure { margin: 0; } figure img { width: 100%; border: 1px solid var(--line); }
+  figcaption { padding-top: 10px; color: #77766f; font: 650 .63rem/1.4 ui-monospace, monospace; text-transform: uppercase; }
+  .tool-list { display: grid; grid-template-columns: .7fr 1.3fr; gap: 90px; }
+  .tool-items { border-top: 1px solid var(--line); }
+  .tool-items article { display: grid; grid-template-columns: 55px .7fr 1fr; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .tool-items article > span { color: var(--blue); font: 700 .7rem/1 ui-monospace, monospace; }
+  .tool-items p, .tool-items h3 { margin: 0; }
+  .compiler-section { padding: 110px 0; color: white; background: #171714; }
+  .compiler-section p { color: #bab9b0; } .compiler-section .eyebrow, .compiler-section .text-link { color: var(--acid); }
+  .limits { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; }
+  .limits h3 { margin-top: 28px; font-size: 2rem; }
+  @media (max-width: 800px) { .overview, .feature-row, .compiler-grid, .tool-list, .limits { grid-template-columns: 1fr; gap: 42px; } .tool-items article { grid-template-columns: 35px 1fr; } .tool-items p { grid-column: 2; } }
+</style>

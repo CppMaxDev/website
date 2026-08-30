@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+<Layout title="Beta guide | cppMax" description="A short guide to projects, compilation, signing, and execution in cppMax.">
+  <PageHero eyebrow="Beta guide" title="Build and run your first program." description="The public reference is still being written. This page covers the current project loop and the limits you are likely to hit." />
+  <section class="section"><div class="shell docs-layout">
+    <aside><strong>Contents</strong><a href="#first-run">First run</a><a href="#projects">Project files</a><a href="#build">Build output</a><a href="#signing">Signing</a><a href="#limits">Beta limits</a><a href="/support/">Get help ↗</a></aside>
+    <article class="prose">
+      <h2 id="first-run">First run</h2>
+      <ol><li>Create a C++ project.</li><li>Open <code>main.cpp</code>.</li><li>Enter the example below.</li><li>Build with the bundled Clang toolchain.</li><li>Approve the signing prompt.</li><li>Run the ELF and read its output in the console.</li></ol>
+      <div class="code-block"><div><span>main.cpp</span><span>C++</span></div><pre><b>#include</b> &lt;iostream&gt;
+
+int main() &#123;
+  std::cout &lt;&lt; <i>"Hello from cppMax!\n"</i>;
+  return 0;
+&#125;</pre></div>
+      <h2 id="projects">Project files</h2><p>cppMax projects can contain several source and header files. Open files in tabs and use the project tree to move between them. Git can clone an existing repository and track local changes.</p>
+      <h3>CMake support</h3><p>Most CMake project setups work in the beta. Start with a small configuration if you are bringing in a project that depends on platform-specific libraries or build scripts.</p>
+      <h2 id="build">Build output</h2><p>Clang compiles the source. LLD links the result into an arm64 ELF executable. The console shows compiler diagnostics and the final build status.</p>
+      <h2 id="signing">Signing</h2><p>cppMax records the ELF's SHA-256 hash when it signs a build. You can run that unchanged file repeatedly. Rebuilding changes the hash and creates a new file to sign.</p><p>Automatic signing is free during beta.</p>
+      <h2 id="limits">Beta limits</h2><ul><li>Syntax highlighting, static analysis, and breakpoints are basic.</li><li>The virtual Linux layer supports roughly 50 system calls.</li><li>OpenGL support is planned for v1 and is not in the current beta.</li><li>Unsupported instructions stop cleanly instead of crashing the project.</li></ul>
+    </article>
+  </div></section>
+</Layout>
+<style>
+  .docs-layout { display: grid; grid-template-columns: 220px 1fr; gap: 90px; align-items: start; }
+  aside { position: sticky; top: 105px; display: flex; flex-direction: column; gap: 14px; padding: 22px 0; border-block: 1px solid var(--line); }
+  aside strong { margin-bottom: 8px; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
+  aside a { color: var(--muted); font-size: .88rem; text-decoration: none; }
+  aside a:hover { color: var(--blue); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose code { padding: 2px 6px; color: var(--blue); background: #e1e5ff; font-family: ui-monospace, monospace; }
+  .code-block { margin: 38px 0; color: #ecece6; background: #171714; }
+  .code-block > div { display: flex; justify-content: space-between; padding: 13px 18px; border-bottom: 1px solid #3a3a35; color: #97978e; font: 650 .67rem/1 ui-monospace, monospace; text-transform: uppercase; }
+  .code-block pre { margin: 0; padding: 28px; overflow-x: auto; font: 500 .8rem/1.8 ui-monospace, monospace; }
+  .code-block b { color: var(--acid); font-weight: 500; } .code-block i { color: #ffad88; font-style: normal; }
+  @media (max-width: 720px) { .docs-layout { grid-template-columns: 1fr; gap: 40px; } aside { position: static; } }
+</style>

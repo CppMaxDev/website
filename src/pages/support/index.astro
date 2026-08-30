@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+<Layout title="Beta access and support | cppMax" description="Check cppMax beta access and get help with the website.">
+  <PageHero eyebrow="Support" title="Beta access and useful help." description="There is no public download link yet. This page will point to TestFlight when the invite is ready." />
+
+  <section class="section" id="beta-access"><div class="shell access-grid">
+    <div><span class="access-status"><i></i> Private testing</span><h2>The public beta link is not posted yet.</h2><p class="lead">cppMax is being tested through pre-release builds. Once public TestFlight access opens, the download button will live here.</p></div>
+    <aside><p class="eyebrow">Current access</p><strong>Invite only</strong><p>No signup form or waiting list is connected to this site yet.</p><span class="disabled">TestFlight link coming later</span></aside>
+  </div></section>
+
+  <section class="section rule"><div class="shell help-grid">
+    <a href="/docs/"><span>01</span><h3>Build your first program</h3><p>Follow the short beta guide.</p><b>Open docs →</b></a>
+    <a href="/faq/"><span>02</span><h3>Check a product question</h3><p>Read about files, offline use, signing, and compatibility.</p><b>Read FAQ →</b></a>
+    <a href="https://github.com/CppMaxDev/website/issues" rel="noreferrer"><span>03</span><h3>Report a website problem</h3><p>Use the public issue tracker for this website only.</p><b>Open GitHub ↗</b></a>
+  </div></section>
+
+  <section class="section rule"><div class="shell report-grid"><div><p class="eyebrow">Reporting an app bug</p><h2>Bring the steps, not private code.</h2><p>In-app beta support details will be added when the public testing channel opens.</p></div><ol><li><span>What you did</span><p>The shortest steps that trigger the problem.</p></li><li><span>What happened</span><p>The exact error or console output.</p></li><li><span>Where it happened</span><p>Your device model, OS version, and cppMax beta build.</p></li></ol></div></section>
+  <section class="section-sm"><div class="shell note"><p>Do not paste private source code, credentials, signing data, or personal files into a public GitHub issue.</p></div></section>
+</Layout>
+<style>
+  .access-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 80px; align-items: start; }
+  .access-status { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 34px; padding: 8px 10px; border: 1px solid var(--line); font: 700 .66rem/1 ui-monospace, monospace; text-transform: uppercase; }
+  .access-status i { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
+  .access-grid aside { padding: 30px; border: 1px solid var(--line); }
+  .access-grid aside strong { display: block; margin-bottom: 18px; font-size: 2rem; }
+  .disabled { display: block; margin-top: 30px; padding: 15px; color: #77766f; background: var(--paper-2); font-weight: 750; text-align: center; }
+  .help-grid { display: grid; grid-template-columns: repeat(3,1fr); }
+  .help-grid a { padding: 34px; border: 1px solid var(--line); border-right: 0; text-decoration: none; }
+  .help-grid a:last-child { border-right: 1px solid var(--line); }
+  .help-grid a:hover { color: white; background: var(--blue); }
+  .help-grid a:hover p { color: #dbe1ff; }
+  .help-grid span { display: block; margin-bottom: 65px; color: var(--blue); font: 700 .7rem/1 ui-monospace, monospace; }
+  .help-grid a:hover span { color: var(--acid); }
+  .help-grid b { color: var(--blue); font-size: .84rem; }
+  .help-grid a:hover b { color: white; }
+  .report-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 90px; }
+  .report-grid ol { margin: 0; padding: 0; list-style: none; counter-reset: item; border-top: 1px solid var(--line); }
+  .report-grid li { display: grid; grid-template-columns: .8fr 1.2fr; gap: 25px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .report-grid li span { color: var(--ink); font-weight: 750; }
+  .report-grid li p { margin: 0; }
+  @media (max-width: 760px) { .access-grid, .help-grid, .report-grid { grid-template-columns: 1fr; gap: 42px; } .help-grid a { border-right: 1px solid var(--line); border-bottom: 0; } .help-grid a:last-child { border-bottom: 1px solid var(--line); } }
+</style>
