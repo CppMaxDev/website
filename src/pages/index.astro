@@ -21,37 +21,37 @@ import Layout from '../layouts/Layout.astro';
 
   <section class="home-body" aria-labelledby="feature-heading">
     <div class="feature-shell">
-      <h2 id="feature-heading">Built for C++ work on iOS</h2>
+      <!--<h2 id="feature-heading">Built for C++ work on iOS</h2>-->
       <div class="feature-cards">
         <a class="feature-card" href="/how-it-works/#offline">
           <span class="placeholder-icon" aria-hidden="true">01</span>
-          <h3>Works Offline</h3>
-          <p>Edit, compile, and run local projects without sending them to a remote build machine.</p>
+          <h3>Works offline</h3>
+          <p>Edit, compile, and run local projects completcompletely on device. <b>YOUR FILES NEVER HAVE TO LEAVE YOUR DEVICE!</b></p>
         </a>
         <a class="feature-card" href="/how-it-works/#compilation">
           <span class="placeholder-icon" aria-hidden="true">02</span>
-          <h3>Real Compilation Pipeline</h3>
-          <p>Clang and LLD produce an arm64 ELF on the device.</p>
+          <h3>Real compilation pipeline</h3>
+          <p>Clang and LLD produce a <u><b>REAL</b> arm64 <b>ELF</b></u> on the device. Just like they would on any PC.</p>
         </a>
         <a class="feature-card" href="/features/#project-work">
           <span class="placeholder-icon" aria-hidden="true">03</span>
-          <h3>Do Real Work</h3>
-          <p>Work with project files, Git repositories, CMake builds, and console programs.</p>
+          <h3>Do real work</h3>
+          <p>Work on YOUR REAL FILE SYSTEM, programaticaly analyze real files, create new ones, all packaged behind a linux like wrapper. <br> * linux wrapper does not <u>yet</u> support all syscalls. </p>
         </a>
         <a class="feature-card" href="/features/#development-tools">
           <span class="placeholder-icon" aria-hidden="true">04</span>
-          <h3>Professional Development Tools</h3>
-          <p>Use the beta editor, static analysis, breakpoints, and console input and output.</p>
+          <h3>Professional development tools</h3>
+          <p>FULL GIT and CMAKE support! Optimized to work with GIGANTIC FILES in COMPLEX PROJECTS</p>
         </a>
         <a class="feature-card" href="/how-it-works/#standard-files">
           <span class="placeholder-icon" aria-hidden="true">05</span>
-          <h3>No Proprietary File Format</h3>
-          <p>Projects use normal source files, CMake configuration, Git, and standard arm64 ELF output.</p>
+          <h3>Privacy First</h3>
+          <p>NO ACCOUNT at all, and Everything is LOCAL! No cloud server, no file sending, no sketchy privacy policy. YOU controll YOUR files</p>
         </a>
         <a class="feature-card" href="/changelog/">
           <span class="placeholder-icon" aria-hidden="true">06</span>
-          <h3>Actively Being Developed</h3>
-          <p>Follow changes to the current beta as new builds are prepared.</p>
+          <h3>Actively being developed</h3>
+          <p>I'm a single devdeveloper, actively working on this project. Have a look at the change logs.</p>
         </a>
       </div>
     </div>
@@ -67,7 +67,10 @@ import Layout from '../layouts/Layout.astro';
     frame = 0;
     if (!preview || reducedMotion.matches) return;
     const progress = Math.min(Math.max(window.scrollY / 520, 0), 1);
-    preview.style.setProperty('--scroll-progress', progress.toString());
+    preview.style.setProperty('--preview-scale', (1 + progress * .04).toString());
+    preview.style.setProperty('--shadow-y', `${18 + progress * 20}px`);
+    preview.style.setProperty('--shadow-blur', `${22 + progress * 24}px`);
+    preview.style.setProperty('--shadow-alpha', (.2 + progress * .2).toString());
   };
 
   const requestPreviewUpdate = () => {
@@ -121,15 +124,18 @@ import Layout from '../layouts/Layout.astro';
     text-underline-offset: 3px;
   }
   .ipad-preview {
-    --scroll-progress: 0;
+    --preview-scale: 1;
+    --shadow-y: 18px;
+    --shadow-blur: 22px;
+    --shadow-alpha: .2;
     position: absolute;
     z-index: 3;
     top: 52%;
     left: 50%;
     width: min(940px, 88vw);
     margin: 0;
-    filter: drop-shadow(0 calc(18px + 20px * var(--scroll-progress)) calc(22px + 24px * var(--scroll-progress)) rgba(0, 0, 0, calc(.2 + .2 * var(--scroll-progress))));
-    transform: translateX(-50%) scale(calc(1 + .04 * var(--scroll-progress)));
+    filter: drop-shadow(0 var(--shadow-y) var(--shadow-blur) rgba(0, 0, 0, var(--shadow-alpha)));
+    transform: translateX(-50%) scale(var(--preview-scale));
     transform-origin: center top;
     will-change: filter, transform;
   }
