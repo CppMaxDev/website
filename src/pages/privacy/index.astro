@@ -1,28 +1,76 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHero from '../../components/PageHero.astro';
+import ReferenceLayout from '../../components/ReferenceLayout.astro';
+
+const contents = [
+  { href: '#local-work', label: 'Your local work' },
+  { href: '#build-data', label: 'Build authorization' },
+  { href: '#network-use', label: 'When you go online' },
+  { href: '#third-parties', label: 'Other services' },
+  { href: '#support-data', label: 'Support reports' },
+  { href: '#future-services', label: 'Future services' },
+  { href: '#privacy-gaps', label: 'What is still missing' },
+];
 ---
-<Layout title="Privacy | cppMax" description="What cppMax keeps on your device and when optional services use the network.">
-  <PageHero eyebrow="Privacy" title="The compiler does not need your code in the cloud." description="cppMax is designed to edit, compile, and run projects on your device. This draft describes the current beta." />
-  <section class="section"><div class="shell policy-layout">
-    <aside><strong>Draft notice</strong><span>Updated August 29, 2026</span><p>This notice will expand before the public App Store release.</p></aside>
-    <article class="prose">
-      <h2>Code and project files</h2><p>The editor reads and writes project files on your device. Clang and LLD compile those files locally. cppMax does not need to send source code or compiled programs to a cppMax server for the build and run loop.</p>
-      <h2>Signing data</h2><p>cppMax uses the executable's SHA-256 hash to identify a signed build. The current beta performs automatic signing. This notice will be updated with storage and service details before post-beta signing or envToken services launch.</p>
-      <h2>When the network is used</h2><p>Core editing and compilation can work offline. These optional actions use a connection:</p><ul><li>Cloning, pulling, or pushing a remote Git repository</li><li>Opening a support channel or public issue tracker</li><li>Earning envTokens through the planned advertising option</li><li>Checking for app or beta updates</li></ul><p>Third-party services have their own privacy terms.</p>
-      <h2>Diagnostics and support</h2><p>Review logs before sharing them. Remove source code, file paths, credentials, and personal information that support staff do not need to reproduce the problem.</p>
-      <h2>Changes</h2><p>The update date at the top of this page will change when the notice changes. The final policy will identify the app operator, contact method, service providers, retention periods, and user rights before public release.</p>
-      <h2>Questions</h2><p>The current contact status is listed on the <a class="text-link" href="/support/">support page</a>.</p>
-    </article>
-  </div></section>
-</Layout>
+
+<ReferenceLayout
+  pageTitle="Privacy | cppMax"
+  metaDescription="A plain-language explanation of local project data and optional network use in the current cppMax beta."
+  heading="Your code stays on your device."
+  introduction="The short version of cppMax privacy, with links to the exact draft terms."
+  contents={contents}
+>
+  <p class="temporary-note">Draft updated August 31, 2026. This summary covers the current beta and website. The public-release policy still needs the operator's legal identity and contact details.</p>
+
+  <section id="local-work">
+    <p class="section-label">Your local work</p>
+    <h2>Editing and compiling do not need a cppMax server.</h2>
+    <p>Your source files, project files, and compiler output stay on your iPhone or iPad during the normal edit, build, and run loop. cppMax does not need to upload that material to compile it.</p>
+    <p>Read the exact draft wording in <a href="/legal/#legal-2-1">section 2.1, Local project data</a>.</p>
+  </section>
+
+  <section id="build-data">
+    <p class="section-label">Build authorization</p>
+    <h2>A SHA-256 hash identifies an exact build.</h2>
+    <p>cppMax uses the executable's hash to distinguish one build from another. A hash identifies the build for authorization, but it is not the source code itself.</p>
+    <p>The final post-beta policy still needs to say where authorization records live and how long they remain. See <a href="/legal/#legal-2-2">section 2.2, Build authorization data</a>.</p>
+  </section>
+
+  <section id="network-use">
+    <p class="section-label">When you go online</p>
+    <h2>Core project work can stay offline.</h2>
+    <p>A connection is used when you choose a remote action such as cloning, pulling, or pushing a Git repository. App or beta updates, support links, and future envToken services also need a connection.</p>
+    <p>The complete current list is in <a href="/legal/#legal-2-3">section 2.3, Network activity</a>.</p>
+  </section>
+
+  <section id="third-parties">
+    <p class="section-label">Other services</p>
+    <h2>A remote service follows its own privacy rules.</h2>
+    <p>If you connect a Git host, send an email, use TestFlight in the future, or choose future advertising, that provider may receive information under its own policy.</p>
+    <p>See <a href="/legal/#legal-2-4">section 2.4, Third-party services</a>.</p>
+  </section>
+
+  <section id="support-data">
+    <p class="section-label">Support reports</p>
+    <h2>Check a report before sharing it.</h2>
+    <p>Remove source code, credentials, private file paths, and personal information unless that exact detail is needed to reproduce the problem. Email only the details needed for support or feedback.</p>
+    <p>See <a href="/legal/#legal-2-5">section 2.5, Support information</a>.</p>
+  </section>
+
+  <section id="future-services">
+    <p class="section-label">Future services</p>
+    <h2>Ads and paid interpreter access are plans, not beta services.</h2>
+    <p>The current beta does not charge for interpreter access. The planned v1 options include optional advertising, envTokens, monthly access, and prepaid access. Their final data handling has not been published.</p>
+    <p>See <a href="/legal/#legal-2-8">section 2.8, Planned post-beta services</a>.</p>
+  </section>
+
+  <section id="privacy-gaps">
+    <p class="section-label">What is still missing</p>
+    <h2>This is not the final privacy policy.</h2>
+    <p>Before public release, the policy must name the operator, provide a privacy contact, identify service providers, define retention periods, explain deletion and user rights, and describe any server-side logs.</p>
+    <p>The unresolved items are listed in <a href="/legal/#legal-7">section 7, Information still required</a>.</p>
+  </section>
+</ReferenceLayout>
+
 <style>
-  .policy-layout { display: grid; grid-template-columns: 250px 1fr; gap: 90px; align-items: start; }
-  .policy-layout aside { position: sticky; top: 105px; padding: 24px; border: 1px solid var(--line); }
-  .policy-layout aside strong, .policy-layout aside span { display: block; }
-  .policy-layout aside strong { margin-bottom: 8px; color: var(--orange); text-transform: uppercase; font-size: .72rem; letter-spacing: .08em; }
-  .policy-layout aside span { font-weight: 750; }
-  .policy-layout aside p { margin: 24px 0 0; font-size: .85rem; }
-  .prose h2:first-child { margin-top: 0; }
-  @media (max-width: 720px) { .policy-layout { grid-template-columns: 1fr; gap: 45px; } .policy-layout aside { position: static; } }
+  :global(.reference-content a) { color: #78b8ff; text-underline-offset: 4px; }
 </style>

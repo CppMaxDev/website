@@ -1,35 +1,86 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHero from '../../components/PageHero.astro';
+import ReferenceLayout from '../../components/ReferenceLayout.astro';
+
 const questions = [
-  ['Can I download cppMax now?', 'cppMax is in a private beta. A public TestFlight or App Store link has not been posted yet. The support page tracks the current access status.'],
-  ['Does cppMax upload my code?', 'No compiler server is required. Source files, builds, and project files can stay on your iPhone or iPad. Git remotes and support channels use the network only when you choose to use them.'],
-  ['Does it work offline?', 'Editing, compiling, and running an already-signed ELF work locally. The planned envToken model also lets you save tokens before a period offline.'],
-  ['Is the compiler real?', 'Yes. cppMax bundles LLVM, Clang, and LLD. It produces a real arm64 ELF executable. cppMax interprets that ELF because iOS cannot load newly compiled native code directly.'],
-  ['Why sign an executable?', 'The signature authorizes one exact ELF, identified by its SHA-256 hash. Run that file as often as you want. A rebuild creates a different hash and needs a new signature.'],
-  ['What does an envToken pay for?', 'After beta, the current plan uses one envToken to sign a standard ELF and two for a future graphical program. Editing, compiling, and running a signed file stay free. Automatic signing costs nothing during beta.'],
-  ['Can a program read and write files?', 'Yes. The virtual Linux layer maps supported file system calls to iOS. The beta currently supports a focused set of roughly 50 system calls.'],
-  ['Does it support Git and CMake?', 'The beta has full Git support and supports most CMake projects. Projects with platform-specific libraries or unusual build scripts may need changes.'],
-  ['Is OpenGL in the beta?', 'No. OpenGL translation to Metal is planned for v1.'],
-  ['Can an unsupported instruction damage my project?', 'cppMax is built to stop the program cleanly when it meets an unsupported instruction or operation. Keep backups of important beta work anyway.'],
+  {
+    id: 'download',
+    question: 'Can I download cppMax now?',
+    answer: 'cppMax is in a private beta. A public TestFlight or App Store link has not been posted yet. The Get the beta page tracks the current access status.',
+  },
+  {
+    id: 'source-privacy',
+    question: 'Does cppMax upload my code?',
+    answer: 'No compiler server is required. Source files, builds, and project files can stay on your iPhone or iPad. Git remotes, email, and future online services use the network only when you choose to use them.',
+  },
+  {
+    id: 'offline',
+    question: 'Does it work offline?',
+    answer: 'Editing, compiling, and running an already-authorized ELF work locally. The planned envToken model also lets you save tokens before a period offline.',
+  },
+  {
+    id: 'compiler',
+    question: 'Is the compiler real?',
+    answer: 'Yes. cppMax bundles LLVM, Clang, and LLD. It produces a real arm64 ELF executable. cppMax interprets that ELF because iOS does not load newly compiled native code directly.',
+  },
+  {
+    id: 'authorization',
+    question: 'Why authorize an executable?',
+    answer: 'Authorization belongs to one exact ELF, identified by its SHA-256 hash. Run that unchanged file as often as you want. A rebuild creates a different hash and needs new authorization.',
+  },
+  {
+    id: 'envtokens',
+    question: 'What does an envToken pay for?',
+    answer: 'After beta, the current plan uses one envToken to give a standard build interpreter access and two for a future graphical program. Editing and compiling stay free. An unchanged authorized build can run as often as you want. Interpreter access costs nothing during beta.',
+  },
+  {
+    id: 'files',
+    question: 'Can a program read and write files?',
+    answer: 'Yes. The virtual Linux layer maps supported file system calls to iOS. The beta currently supports a focused set of roughly 50 system calls.',
+  },
+  {
+    id: 'git-cmake',
+    question: 'Does it support Git and CMake?',
+    answer: 'The beta has full Git support and supports most CMake projects. Projects with platform-specific libraries or unusual build scripts may need changes.',
+  },
+  {
+    id: 'opengl',
+    question: 'Is OpenGL in the beta?',
+    answer: 'No. OpenGL translation to Metal is planned for v1.',
+  },
+  {
+    id: 'unsupported-instructions',
+    question: 'Can an unsupported instruction damage my project?',
+    answer: 'cppMax is built to stop the program cleanly when it meets an unsupported instruction or operation. Keep backups of important beta work anyway.',
+  },
 ];
+
+const contents = questions.map(({ id, question }) => ({ href: `#${id}`, label: question }));
 ---
-<Layout title="Questions about cppMax" description="Answers about beta access, local compilation, envTokens, and current cppMax limits.">
-  <PageHero eyebrow="FAQ" title="Questions the beta raises." description="The unusual part is not writing C++ on an iPad. It is how the compiled program runs. These answers cover both." />
-  <section class="section"><div class="shell questions">
-    {questions.map(([question, answer], index) => <details open={index === 0}><summary><span>{String(index + 1).padStart(2, '0')}</span><strong>{question}</strong><b>+</b></summary><p>{answer}</p></details>)}
-  </div></section>
-  <section class="section-sm"><div class="shell cta-band"><h2>Need an answer that is not here?</h2><a class="button" href="/support/">Support options</a></div></section>
-</Layout>
+
+<ReferenceLayout
+  pageTitle="FAQ | cppMax"
+  metaDescription="Answers about cppMax beta access, local compilation, envTokens, Git, CMake, and current limits."
+  heading="Frequently asked questions."
+  introduction="Short answers about the current beta and the planned v1 product."
+  contents={contents}
+>
+  <div class="questions">
+    {questions.map(({ id, question, answer }, index) => (
+      <div class="question" id={id}>
+        <span>{String(index + 1).padStart(2, '0')}</span>
+        <div><h2>{question}</h2><p>{answer}</p></div>
+      </div>
+    ))}
+  </div>
+</ReferenceLayout>
+
 <style>
-  .questions { max-width: 920px; }
-  details { border-bottom: 1px solid var(--line); }
-  details:first-child { border-top: 1px solid var(--line); }
-  summary { display: grid; grid-template-columns: 55px 1fr 30px; align-items: center; padding: 29px 0; cursor: pointer; list-style: none; }
-  summary::-webkit-details-marker { display: none; }
-  summary span { color: var(--blue); font: 700 .7rem/1 ui-monospace, monospace; }
-  summary strong { font-size: 1.12rem; }
-  summary b { color: var(--blue); font-size: 1.35rem; font-weight: 500; transition: transform 150ms ease; }
-  details[open] summary b { transform: rotate(45deg); }
-  details p { max-width: 760px; margin: -5px 30px 30px 55px; }
+  .questions { border-top: 1px solid #454649; }
+  .question { display: grid; grid-template-columns: 45px 1fr; gap: 10px; padding: 34px 0 38px; scroll-margin-top: 112px; border-bottom: 1px solid #454649; }
+  .question > span { padding-top: 7px; color: #78b8ff; font: 700 .7rem/1 ui-monospace, monospace; }
+  .question h2 { margin: 0 0 15px; font-size: clamp(1.2rem, 2.5vw, 1.75rem); line-height: 1.2; letter-spacing: -.025em; }
+  .question p { max-width: 720px; margin: 0; color: #b7b8bc; line-height: 1.7; }
+  @media (max-width: 560px) {
+    .question { grid-template-columns: 32px 1fr; }
+  }
 </style>

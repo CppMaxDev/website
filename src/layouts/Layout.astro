@@ -25,7 +25,8 @@ const nav = [
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f4f1e9" />
-    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="icon" type="image/png" href="/favicon-64.png?v=cppmax-app-icon-2" sizes="64x57" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=cppmax-app-icon-2" />
     <title>{title}</title>
   </head>
   <body>
@@ -33,7 +34,7 @@ const nav = [
       <div class="shell header-inner">
         <a class="brand" href="/" aria-label="cppMax home"><img class="brand-logo" src="/images/logo.png" alt="" /><span>cppMax</span></a>
         <nav aria-label="Main navigation">{nav.map((item) => <a href={item.href}>{item.label}</a>)}</nav>
-        <a class="beta-link" href="/support/#beta-access">Get the beta <span>↗</span></a>
+        <a class="beta-link" href="/get-the-beta/">Get the beta <span>↗</span></a>
       </div>
     </header>
     <main><slot /></main>
@@ -41,7 +42,7 @@ const nav = [
       <div class="shell footer-top">
         <div class="footer-statement"><a class="brand" href="/"><img class="brand-logo" src="/images/logo.png" alt="" /><span>cppMax</span></a><p>Build C++ programs on the device you already carry.</p></div>
         <div><strong>Product</strong><a href="/features/">What works</a><a href="/how-it-works/">How it runs</a><a href="/pricing/">Pricing</a><a href="/docs/">Docs</a></div>
-        <div><strong>Help</strong><a href="/faq/">FAQ</a><a href="/support/">Support</a></div>
+        <div><strong>Help</strong><a href="/get-the-beta/">Get the beta</a><a href="/faq/">FAQ</a><a href="/support/">Contact</a></div>
         <div><strong>Fine print</strong><a href="/privacy/">Privacy</a><a href="/legal/">Legal</a></div>
       </div>
       <div class="shell footer-bottom"><span>cppMax beta</span><span>iPhone and iPad</span><span>© {new Date().getFullYear()}</span></div>

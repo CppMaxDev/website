@@ -1,44 +1,60 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import PageHero from '../../components/PageHero.astro';
 ---
-<Layout title="Beta access and support | cppMax" description="Check cppMax beta access and get help with the website.">
-  <PageHero eyebrow="Support" title="Beta access and useful help." description="There is no public download link yet. This page will point to TestFlight when the invite is ready." />
 
-  <section class="section" id="beta-access"><div class="shell access-grid">
-    <div><span class="access-status"><i></i> Private testing</span><h2>The public beta link is not posted yet.</h2><p class="lead">cppMax is being tested through pre-release builds. Once public TestFlight access opens, the download button will live here.</p></div>
-    <aside><p class="eyebrow">Current access</p><strong>Invite only</strong><p>No signup form or waiting list is connected to this site yet.</p><span class="disabled">TestFlight link coming later</span></aside>
-  </div></section>
+<Layout title="Contact | cppMax" description="Email cppMax support, report an app problem, or contact the developer.">
+  <header class="contact-hero">
+    <div class="shell">
+      <h1>Contact.</h1>
+      <p>Choose the address that matches what you need.</p>
+    </div>
+  </header>
 
-  <section class="section rule"><div class="shell help-grid">
-    <a href="/docs/"><span>01</span><h3>Build your first program</h3><p>Follow the short beta guide.</p><b>Open docs →</b></a>
-    <a href="/faq/"><span>02</span><h3>Check a product question</h3><p>Read about files, offline use, signing, and compatibility.</p><b>Read FAQ →</b></a>
-    <a href="https://github.com/CppMaxDev/website/issues" rel="noreferrer"><span>03</span><h3>Report a website problem</h3><p>Use the public issue tracker for this website only.</p><b>Open GitHub ↗</b></a>
-  </div></section>
+  <section class="contact-section">
+    <div class="contact-grid">
+      <article>
+        <span class="contact-number">01</span>
+        <h2>Support</h2>
+        <p>Get help with cppMax, beta access, or something that is not working as expected.</p>
+        <a href="mailto:support@cppmax.com">support@cppmax.com</a>
+      </article>
 
-  <section class="section rule"><div class="shell report-grid"><div><p class="eyebrow">Reporting an app bug</p><h2>Bring the steps, not private code.</h2><p>In-app beta support details will be added when the public testing channel opens.</p></div><ol><li><span>What you did</span><p>The shortest steps that trigger the problem.</p></li><li><span>What happened</span><p>The exact error or console output.</p></li><li><span>Where it happened</span><p>Your device model, OS version, and cppMax beta build.</p></li></ol></div></section>
-  <section class="section-sm"><div class="shell note"><p>Do not paste private source code, credentials, signing data, or personal files into a public GitHub issue.</p></div></section>
+      <article>
+        <span class="contact-number">02</span>
+        <h2>App feedback and bug reports</h2>
+        <p>The in-app feedback tool is easier because it can include the relevant app and build details. If cppMax or its feedback tool does not work, send the report manually.</p>
+        <a href="mailto:feedback@cppmax.com">feedback@cppmax.com</a>
+      </article>
+
+      <article>
+        <span class="contact-number">03</span>
+        <h2>Contact me</h2>
+        <p>Use this address for messages that do not belong in support or app feedback.</p>
+        <a href="mailto:contact@cppmax.com">contact@cppmax.com</a>
+      </article>
+
+      <article class="address-card">
+        <span class="contact-number">04</span>
+        <h2>Address</h2>
+        <p>If you are still in the stone ages and want to send physical mail for some reason.</p>
+        <span class="blank-address" aria-label="Address not provided"></span>
+      </article>
+    </div>
+  </section>
 </Layout>
+
 <style>
-  .access-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 80px; align-items: start; }
-  .access-status { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 34px; padding: 8px 10px; border: 1px solid var(--line); font: 700 .66rem/1 ui-monospace, monospace; text-transform: uppercase; }
-  .access-status i { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
-  .access-grid aside { padding: 30px; border: 1px solid var(--line); }
-  .access-grid aside strong { display: block; margin-bottom: 18px; font-size: 2rem; }
-  .disabled { display: block; margin-top: 30px; padding: 15px; color: #77766f; background: var(--paper-2); font-weight: 750; text-align: center; }
-  .help-grid { display: grid; grid-template-columns: repeat(3,1fr); }
-  .help-grid a { padding: 34px; border: 1px solid var(--line); border-right: 0; text-decoration: none; }
-  .help-grid a:last-child { border-right: 1px solid var(--line); }
-  .help-grid a:hover { color: white; background: var(--blue); }
-  .help-grid a:hover p { color: #dbe1ff; }
-  .help-grid span { display: block; margin-bottom: 65px; color: var(--blue); font: 700 .7rem/1 ui-monospace, monospace; }
-  .help-grid a:hover span { color: var(--acid); }
-  .help-grid b { color: var(--blue); font-size: .84rem; }
-  .help-grid a:hover b { color: white; }
-  .report-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 90px; }
-  .report-grid ol { margin: 0; padding: 0; list-style: none; counter-reset: item; border-top: 1px solid var(--line); }
-  .report-grid li { display: grid; grid-template-columns: .8fr 1.2fr; gap: 25px; padding: 24px 0; border-bottom: 1px solid var(--line); }
-  .report-grid li span { color: var(--ink); font-weight: 750; }
-  .report-grid li p { margin: 0; }
-  @media (max-width: 760px) { .access-grid, .help-grid, .report-grid { grid-template-columns: 1fr; gap: 42px; } .help-grid a { border-right: 1px solid var(--line); border-bottom: 0; } .help-grid a:last-child { border-bottom: 1px solid var(--line); } }
+  .contact-hero { padding: clamp(82px, 11vw, 142px) 0 clamp(70px, 9vw, 112px); text-align: center; background: #f8fbff; }
+  .contact-hero h1 { max-width: 980px; margin: 0 auto 24px; color: #08090b; font-size: clamp(4rem, 9vw, 7.6rem); line-height: .92; }
+  .contact-hero p { margin: 0 auto; color: #53565a; font-size: clamp(1.05rem, 2vw, 1.3rem); }
+  .contact-section { padding: 88px 24px 124px; color: #f5f5f7; background: #242526; }
+  .contact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; width: min(1100px, 100%); margin-inline: auto; }
+  .contact-grid article { display: flex; min-height: 330px; flex-direction: column; padding: 30px; border: 1px solid #454649; border-radius: 22px; background: #2d2e30; }
+  .contact-number { margin-bottom: 64px; color: #78b8ff; font: 700 .72rem/1 ui-monospace, monospace; }
+  .contact-grid h2 { margin-bottom: 16px; font-size: clamp(1.8rem, 3.4vw, 3rem); }
+  .contact-grid p { max-width: 520px; color: #b7b8bc; }
+  .contact-grid a { margin-top: auto; color: #78b8ff; font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 700; text-underline-offset: 5px; overflow-wrap: anywhere; }
+  .address-card { min-height: 240px !important; }
+  .blank-address { display: block; min-height: 48px; margin-top: auto; border-bottom: 1px solid #5b5d61; }
+  @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
 </style>

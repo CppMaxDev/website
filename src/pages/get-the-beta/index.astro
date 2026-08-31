@@ -1,0 +1,95 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Get the beta | cppMax" description="Check cppMax beta access and learn how TestFlight distribution works.">
+  <header class="beta-hero">
+    <div class="shell">
+      <p class="section-label">Current beta</p>
+      <h1>Get the beta.</h1>
+      <p>cppMax is distributed through TestFlight while the app is still being tested.</p>
+    </div>
+  </header>
+
+  <section class="access-section">
+    <div class="access-shell">
+      <div class="access-copy">
+        <span class="access-status"><i></i> Private testing</span>
+        <h2>The public TestFlight link is not posted yet.</h2>
+        <p>No public download link or waiting list is connected to this site. The invitation will appear here when external testing opens.</p>
+      </div>
+      <div class="link-card">
+        <span>cppMax TestFlight invitation</span>
+        <strong>Coming later</strong>
+        <span class="disabled-link" aria-disabled="true">Public link not available</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="testflight-section">
+    <div class="content-shell">
+      <div class="testflight-heading">
+        <div>
+          <p class="section-label">Why TestFlight</p>
+          <h2>Beta builds need a place for testing and feedback.</h2>
+        </div>
+        <p>TestFlight is Apple's beta distribution system. It lets testers install pre-release builds, receive updates, and send feedback before an app is released publicly.</p>
+      </div>
+
+      <div class="reason-cards">
+        <article><span>01</span><h3>Still in beta</h3><p>cppMax is not at v1.0. Features, compatibility, and the interface can still change during testing.</p></article>
+        <article><span>02</span><h3>Feedback belongs with the build</h3><p>TestFlight keeps beta updates and tester feedback tied to the pre-release app.</p></article>
+        <article><span>03</span><h3>App Store comes later</h3><p>The App Store is the public release channel. Apple provides TestFlight specifically for beta builds before public distribution.</p></article>
+      </div>
+
+      <p class="apple-note">Apple does not say that an App Store app must literally be version 1.0. cppMax uses TestFlight because this build is still being tested, not because the store enforces that version number. <a href="https://developer.apple.com/testflight/" rel="noreferrer">Read Apple's TestFlight overview ↗</a></p>
+    </div>
+  </section>
+
+  <section class="before-testing">
+    <div class="content-shell consent-grid">
+      <div><p class="section-label">Before testing</p><h2>Read the beta notices first.</h2></div>
+      <div class="notice-links">
+        <a href="/privacy/"><span>Privacy summary</span><b>What stays local and when a connection is used →</b></a>
+        <a href="/legal/"><span>Draft legal terms</span><b>Beta limits, privacy details, and unresolved terms →</b></a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .beta-hero { padding: clamp(82px, 11vw, 142px) 0 clamp(70px, 9vw, 112px); text-align: center; background: #f8fbff; }
+  .section-label { margin: 0 0 18px; color: #0066cc; font: 700 .7rem/1 ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .beta-hero h1 { max-width: 980px; margin: 0 auto 24px; color: #08090b; font-size: clamp(4rem, 9vw, 7.6rem); line-height: .92; }
+  .beta-hero p:last-child { max-width: 690px; margin: 0 auto; color: #53565a; font-size: clamp(1.05rem, 2vw, 1.3rem); }
+  .access-section { padding: 92px 24px; color: #f5f5f7; background: #242526; }
+  .access-shell { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(50px, 8vw, 110px); width: min(1180px, 100%); margin-inline: auto; align-items: center; }
+  .access-copy h2 { max-width: 720px; font-size: clamp(2.6rem, 5.5vw, 5.2rem); }
+  .access-copy p { max-width: 680px; color: #b7b8bc; }
+  .access-status { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 30px; color: #c6c7ca; font: 700 .68rem/1 ui-monospace, monospace; text-transform: uppercase; }
+  .access-status i { width: 8px; height: 8px; border-radius: 50%; background: #e0a34c; }
+  .link-card { display: flex; min-height: 280px; flex-direction: column; padding: 28px; border: 1px solid #454649; border-radius: 22px; background: #2d2e30; }
+  .link-card > span:first-child { color: #8e9095; font-size: .78rem; }
+  .link-card strong { margin: 38px 0 auto; font-size: 2.4rem; }
+  .disabled-link { padding: 15px; border-radius: 10px; color: #8e9095; background: #202123; font-weight: 700; text-align: center; }
+  .testflight-section { padding: 118px 24px; background: #f8fbff; }
+  .content-shell { width: min(1180px, 100%); margin-inline: auto; }
+  .testflight-heading, .consent-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 70px; align-items: end; }
+  .testflight-heading h2, .consent-grid h2 { margin-bottom: 0; font-size: clamp(3rem, 6vw, 5.8rem); }
+  .testflight-heading > p { margin: 0; color: #53565a; }
+  .reason-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 62px; }
+  .reason-cards article { min-height: 285px; padding: 28px; border: 1px solid #d7dce2; border-radius: 20px; background: white; }
+  .reason-cards span { display: block; margin-bottom: 66px; color: #0066cc; font: 700 .72rem/1 ui-monospace, monospace; }
+  .reason-cards h3 { font-size: 1.35rem; }
+  .reason-cards p { margin: 0; color: #53565a; font-size: .94rem; }
+  .apple-note { margin: 28px 0 0; padding: 18px 20px; border: 1px solid #d7dce2; border-radius: 13px; color: #686b70; background: white; font-size: .88rem; }
+  .apple-note a { color: #0066cc; }
+  .before-testing { padding: 110px 24px; color: #f5f5f7; background: #242526; }
+  .before-testing .section-label { color: #78b8ff; }
+  .notice-links { display: grid; gap: 12px; }
+  .notice-links a { display: grid; gap: 8px; padding: 22px; border: 1px solid #454649; border-radius: 15px; color: white; background: #2d2e30; text-decoration: none; }
+  .notice-links a:hover { border-color: #797b80; }
+  .notice-links span { color: #78b8ff; font-size: .78rem; font-weight: 700; }
+  .notice-links b { font-size: .96rem; }
+  @media (max-width: 800px) { .access-shell, .testflight-heading, .consent-grid { grid-template-columns: 1fr; } .reason-cards { grid-template-columns: 1fr; } }
+</style>
