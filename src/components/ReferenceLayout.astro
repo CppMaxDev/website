@@ -1,0 +1,179 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface ContentsItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  pageTitle: string;
+  metaDescription: string;
+  heading: string;
+  introduction: string;
+  contents: ContentsItem[];
+}
+
+const { pageTitle, metaDescription, heading, introduction, contents } = Astro.props;
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+  <header class="reference-hero">
+    <div class="shell">
+      <h1>{heading}</h1>
+      <p>{introduction}</p>
+    </div>
+  </header>
+
+  <section class="reference-shell">
+    <div class="reference-layout">
+      <aside class="contents-panel">
+        <strong>Contents</strong>
+        <nav aria-label="Page contents">
+          {contents.map((item, index) => (
+            <a class={index === 0 ? 'active' : ''} href={item.href}>{item.label}</a>
+          ))}
+        </nav>
+      </aside>
+      <article class="reference-content">
+        <slot />
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.contents-panel a')];
+  const sections = links
+    .map((link) => document.querySelector<HTMLElement>(link.hash))
+    .filter((section): section is HTMLElement => Boolean(section));
+
+  const setActiveLink = (id: string) => {
+    links.forEach((link) => {
+      const active = link.hash === `#${id}`;
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+    if (visible?.target.id) setActiveLink(visible.target.id);
+  }, { rootMargin: '-18% 0px -68% 0px' });
+
+  sections.forEach((section) => observer.observe(section));
+</script>
+
+<style>
+  .reference-hero {
+    padding: clamp(82px, 11vw, 142px) 0 clamp(70px, 9vw, 112px);
+    text-align: center;
+    background: #f8fbff;
+  }
+  .reference-hero h1 {
+    max-width: 980px;
+    margin: 0 auto 24px;
+    color: #08090b;
+    font-size: clamp(3.4rem, 7.7vw, 7rem);
+    line-height: .95;
+  }
+  .reference-hero p {
+    max-width: 720px;
+    margin: 0 auto;
+    color: #53565a;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+  }
+  .reference-shell { padding: 72px 24px 128px; color: #f5f5f7; background: #242526; }
+  .reference-layout {
+    display: grid;
+    grid-template-columns: minmax(250px, 1fr) minmax(0, 2fr);
+    gap: clamp(40px, 6vw, 84px);
+    width: min(1240px, 100%);
+    margin-inline: auto;
+    align-items: start;
+  }
+  .contents-panel {
+    position: sticky;
+    top: 104px;
+    padding: 22px;
+    border: 1px solid #454649;
+    border-radius: 18px;
+    background: #2d2e30;
+  }
+  .contents-panel strong {
+    display: block;
+    margin-bottom: 17px;
+    color: #8e9095;
+    font: 700 .7rem/1 ui-monospace, monospace;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .contents-panel nav { display: grid; gap: 5px; }
+  .contents-panel a {
+    padding: 10px 12px;
+    border-left: 2px solid transparent;
+    border-radius: 0 9px 9px 0;
+    color: #b7b8bc;
+    font-size: .9rem;
+    text-decoration: none;
+  }
+  .contents-panel a:hover { color: white; background: #353638; }
+  .contents-panel a.active { border-left-color: #58a6ff; color: white; background: #353638; }
+  :global(.reference-content section) { scroll-margin-top: 112px; padding: 4px 0 70px; border-bottom: 1px solid #454649; }
+  :global(.reference-content section + section) { padding-top: 68px; }
+  :global(.reference-content section:last-child) { padding-bottom: 0; border-bottom: 0; }
+  :global(.reference-content .section-label) {
+    margin: 0 0 16px;
+    color: #78b8ff;
+    font: 700 .7rem/1 ui-monospace, monospace;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+  }
+  :global(.reference-content h2) { margin-bottom: 24px; font-size: clamp(2rem, 4.2vw, 4rem); line-height: 1; }
+  :global(.reference-content h3) { margin-top: 38px; font-size: 1.35rem; }
+  :global(.reference-content p), :global(.reference-content li) { color: #b7b8bc; font-size: 1rem; line-height: 1.7; }
+  :global(.reference-content p) { max-width: 760px; }
+  :global(.reference-content ul), :global(.reference-content ol) { margin: 24px 0 0; padding-left: 22px; }
+  :global(.reference-content li) { margin-bottom: 10px; padding-left: 5px; }
+  :global(.reference-content code) { padding: 2px 6px; border-radius: 5px; color: #b9d9ff; background: #18191a; font-family: ui-monospace, monospace; }
+  :global(.reference-content .temporary-note) {
+    max-width: none;
+    margin: 0 0 52px;
+    padding: 18px 20px;
+    border: 1px solid #53555a;
+    border-radius: 13px;
+    color: #c6c7ca;
+    background: #2d2e30;
+  }
+  :global(.reference-content .technical-flow) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 30px;
+  }
+  :global(.reference-content .technical-flow span) {
+    padding: 18px;
+    border: 1px solid #484a4e;
+    border-radius: 12px;
+    color: #d8d9db;
+    background: #2d2e30;
+    font: 600 .78rem/1.45 ui-monospace, monospace;
+    text-align: center;
+  }
+  :global(.reference-content .code-block) { margin: 32px 0; border: 1px solid #454649; border-radius: 15px; overflow: hidden; background: #18191a; }
+  :global(.reference-content .code-block > div) { display: flex; justify-content: space-between; padding: 13px 18px; border-bottom: 1px solid #343538; color: #8e9095; font: 650 .67rem/1 ui-monospace, monospace; text-transform: uppercase; }
+  :global(.reference-content .code-block pre) { margin: 0; padding: 26px; overflow-x: auto; color: #e2e2e4; font: 500 .8rem/1.8 ui-monospace, monospace; }
+
+  @media (max-width: 820px) {
+    .reference-layout { grid-template-columns: 1fr; }
+    .contents-panel { position: static; }
+    .contents-panel nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .reference-shell { padding-inline: 15px; }
+    .contents-panel nav, :global(.reference-content .technical-flow) { grid-template-columns: 1fr; }
+  }
+</style>

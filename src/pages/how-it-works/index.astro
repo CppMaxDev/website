@@ -1,36 +1,82 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHero from '../../components/PageHero.astro';
+import ReferenceLayout from '../../components/ReferenceLayout.astro';
+
+const contents = [
+  { href: '#offline', label: 'The iOS constraint' },
+  { href: '#standard-files', label: 'Project input' },
+  { href: '#compilation', label: 'Compilation' },
+  { href: '#signing', label: 'Build signing' },
+  { href: '#interpreter', label: 'AArch64 interpreter' },
+  { href: '#linux-layer', label: 'Virtual Linux layer' },
+  { href: '#runtime-limits', label: 'Current limits' },
+];
 ---
-<Layout title="How cppMax runs C++ on iOS" description="The compiler, signing step, interpreter, and virtual Linux layer inside cppMax.">
-  <PageHero eyebrow="The technical path" title="A compiler, an ELF, and an interpreter." description="Apple does not allow an app to execute newly compiled native code directly. cppMax takes a different route that Apple permits." />
 
-  <section class="section" id="offline"><div class="shell premise"><p class="eyebrow">The constraint</p><h2>Clang can create native code on an iPad. iOS will not execute that new code as an app.</h2><p class="lead">cppMax interprets the arm64 instructions instead. The executable is real. The way it runs is different.</p></div></section>
+<ReferenceLayout
+  pageTitle="How cppMax runs C++ on iOS"
+  metaDescription="A technical overview of the compiler, ELF signing, interpreter, and virtual Linux layer inside cppMax."
+  heading="How cppMax runs C++ on iOS."
+  introduction="A technical overview of the path from source files to an interpreted arm64 program."
+  contents={contents}
+>
+  <p class="temporary-note">Temporary technical copy. The final version will document the implementation in more detail.</p>
 
-  <section class="pipeline-section"><div class="shell pipeline">
-    <article id="standard-files"><span>01</span><div><p class="eyebrow">Source</p><h2>You build a normal C++ project.</h2><p>The editor works with local files. Git brings in existing projects, and CMake configures most common builds.</p></div><code>main.cpp<br />parser.cpp<br />CMakeLists.txt</code></article>
-    <article id="compilation"><span>02</span><div><p class="eyebrow">Compile</p><h2>Clang and LLD produce an arm64 ELF.</h2><p>The toolchain runs on the device. The output is a standard executable for the arm64 architecture.</p></div><code>clang++ → .o<br />ld.lld → ELF</code></article>
-    <article><span>03</span><div><p class="eyebrow">Sign</p><h2>cppMax records the ELF's SHA-256 hash.</h2><p>The signature authorizes that exact build. Change the executable and its hash changes, so the new build needs another signature.</p></div><code>SHA-256<br />6b87...e42a</code></article>
-    <article><span>04</span><div><p class="eyebrow">Run</p><h2>The AArch64 interpreter executes each instruction.</h2><p>cppMax reads the executable's arm64 instructions and performs their effects without asking iOS to load the ELF as native app code.</p></div><code>ELF → decode<br />decode → execute</code></article>
-    <article><span>05</span><div><p class="eyebrow">System calls</p><h2>A small Linux layer talks to iOS.</h2><p>The beta maps roughly 50 Linux system calls to the matching iOS operations. That is how a C++ program can read or create real files.</p></div><code>open()<br />read()<br />write()</code></article>
-  </div></section>
+  <section id="offline">
+    <p class="section-label">The iOS constraint</p>
+    <h2>Compiled code cannot be loaded as a new iOS app.</h2>
+    <p>Clang can produce native instructions on an iPhone or iPad, but iOS does not let cppMax load that newly compiled output as executable app code. cppMax keeps the compiler output and changes the way the program runs.</p>
+    <p>The program stays inside cppMax. A custom runtime reads its instructions and performs their effects without asking iOS to execute the ELF directly.</p>
+  </section>
 
-  <section class="section"><div class="shell repeat-grid"><div><p class="eyebrow">Why signing is once per build</p><h2>The signature belongs to the file, not the run.</h2></div><div><p>Run the same signed ELF once or a thousand times. It does not use another envToken. Recompile it and you get a different hash, so cppMax signs the new file.</p><a class="text-link" href="/pricing/">See beta and post-beta pricing</a></div></div></section>
+  <section id="standard-files">
+    <p class="section-label">Project input</p>
+    <h2>The pipeline starts with normal project files.</h2>
+    <p>Source and header files remain ordinary files. CMake can describe the build, and Git can track the project. cppMax does not require a proprietary source format.</p>
+    <div class="technical-flow" aria-label="Example project inputs">
+      <span>main.cpp</span><span>parser.hpp</span><span>CMakeLists.txt</span>
+    </div>
+  </section>
 
-  <section class="section rule"><div class="shell honest"><div><span class="tag">Current beta</span><h3>File tools and console programs</h3><p>The current Linux layer covers a focused set of system calls. It is useful for command-line tools and file processing.</p></div><div><span class="tag">Planned</span><h3>OpenGL translated to Metal</h3><p>The v1 plan adds OpenGL support. cppMax will translate graphics work to Metal during execution.</p></div></div></section>
-</Layout>
-<style>
-  .premise { max-width: 980px; }
-  .pipeline-section { color: white; background: #171714; }
-  .pipeline article { display: grid; grid-template-columns: 70px 1fr 280px; gap: 40px; padding: 68px 0; border-bottom: 1px solid #3c3c37; }
-  .pipeline article:last-child { border: 0; }
-  .pipeline article > span { color: var(--acid); font: 700 .72rem/1 ui-monospace, monospace; }
-  .pipeline .eyebrow { color: var(--acid); }
-  .pipeline h2 { max-width: 680px; font-size: clamp(2rem,4vw,3.8rem); }
-  .pipeline p:not(.eyebrow) { max-width: 650px; color: #b7b6ad; }
-  .pipeline code { align-self: center; padding: 24px; border: 1px solid #464640; color: #d6d5cb; background: #0d0d0c; font: 500 .78rem/1.8 ui-monospace, monospace; }
-  .repeat-grid, .honest { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-  .repeat-grid h2 { margin: 0; }
-  .honest h3 { margin-top: 28px; font-size: 2rem; }
-  @media (max-width: 760px) { .pipeline article { grid-template-columns: 35px 1fr; } .pipeline code { grid-column: 2; } .repeat-grid, .honest { grid-template-columns: 1fr; gap: 42px; } }
-</style>
+  <section id="compilation">
+    <p class="section-label">Compilation</p>
+    <h2>Clang and LLD produce an arm64 ELF.</h2>
+    <p>The bundled toolchain runs on the device. Clang compiles the C++ translation units, and LLD links the objects into an ELF for the arm64 architecture.</p>
+    <div class="technical-flow" aria-label="Compilation stages">
+      <span>C++ source</span><span>Clang + LLD</span><span>arm64 ELF</span>
+    </div>
+  </section>
+
+  <section id="signing">
+    <p class="section-label">Build signing</p>
+    <h2>The signature belongs to one exact build.</h2>
+    <p>cppMax records the ELF's SHA-256 hash during signing. A change to the executable produces a different hash, so the rebuilt file needs a new signature.</p>
+    <p>An unchanged signed ELF can run again because its bytes and hash have not changed.</p>
+  </section>
+
+  <section id="interpreter">
+    <p class="section-label">AArch64 interpreter</p>
+    <h2>The runtime decodes instructions instead of loading the ELF.</h2>
+    <p>The interpreter reads an AArch64 instruction, decodes it, updates its virtual machine state, and moves to the next instruction. iOS runs cppMax itself. cppMax runs the program model inside the app.</p>
+    <div class="technical-flow" aria-label="Interpretation stages">
+      <span>Fetch instruction</span><span>Decode operation</span><span>Update state</span>
+    </div>
+  </section>
+
+  <section id="linux-layer">
+    <p class="section-label">Virtual Linux layer</p>
+    <h2>Supported Linux calls are mapped to iOS operations.</h2>
+    <p>C++ programs need more than CPU instructions. They also ask the operating system to open files, read bytes, write output, and perform other work. The virtual Linux layer handles the supported requests and translates them into operations available to cppMax on iOS.</p>
+    <p>The current beta covers roughly 50 system calls. That focused set supports console programs and local file work.</p>
+  </section>
+
+  <section id="runtime-limits">
+    <p class="section-label">Current limits</p>
+    <h2>The beta runtime does not cover all Linux software.</h2>
+    <ul>
+      <li>The virtual Linux layer implements a limited system-call set.</li>
+      <li>An unsupported instruction stops the program cleanly.</li>
+      <li>OpenGL translation to Metal is planned for v1 and is not part of the beta.</li>
+      <li>Projects tied to platform-specific libraries may need changes.</li>
+    </ul>
+  </section>
+</ReferenceLayout>
