@@ -19,17 +19,191 @@ const categories = [
     ],
   },
   {
-    id: 'git',
-    label: 'Git',
-    features: [
-      { name: 'Clone repositories', implemented: true, description: 'Clone an existing repository into a local project.' },
-      { name: 'Track local changes', implemented: true, description: 'Review project changes without leaving cppMax.' },
-      { name: 'Commit changes', implemented: true, description: 'Create commits from the project on your device.' },
-      { name: 'Branches', implemented: true, description: 'Create and work across Git branches.' },
-      { name: 'Pull from remotes', implemented: true, description: 'Pull changes when you choose to use a network connection.' },
-      { name: 'Push to remotes', implemented: true, description: 'Push commits when you choose to use a network connection.' },
-    ],
-  },
+  id: 'git',
+  label: 'Git',
+  features: [
+    {
+      name: 'Initialize repositories',
+      implemented: true,
+      description: 'Find an existing Git repository or initialize one inside the selected project folder.',
+    },
+    {
+      name: 'Clone repositories',
+      implemented: true,
+      description: 'Clone over HTTPS or from a local path. Clone progress can be cancelled.',
+    },
+    {
+      name: 'View file status',
+      implemented: true,
+      description: 'See staged, unstaged, untracked, ignored, and renamed files in the current worktree.',
+    },
+    {
+      name: 'Stage and unstage changes',
+      implemented: true,
+      description: 'Add files to the index or remove staged changes without changing the working file.',
+    },
+    {
+      name: 'Restore files',
+      implemented: true,
+      description: 'Restore tracked files and remove explicitly selected untracked files.',
+    },
+    {
+      name: 'View diffs',
+      implemented: true,
+      description: 'Open staged, unstaged, and commit diffs with old and new lines aligned side by side.',
+    },
+    {
+      name: 'View commit history',
+      implemented: true,
+      description: 'Browse commits and inspect the files and metadata stored in each commit.',
+    },
+    {
+      name: 'Amend commits',
+      implemented: true,
+      description: 'Replace the latest commit with updated changes or commit metadata.',
+    },
+    {
+      name: 'Blame',
+      implemented: true,
+      description: 'See which commit last changed each line in a file.',
+    },
+    {
+      name: 'Reflog',
+      implemented: true,
+      description: 'Inspect recent changes to local Git references.',
+    },
+    {
+      name: 'Manage branches',
+      implemented: true,
+      description: 'List, create, checkout, rename, and safely delete local and remote-tracking branches.',
+    },
+    {
+      name: 'Detached checkout',
+      implemented: true,
+      description: 'Checkout a commit or revision without creating or switching to a branch.',
+    },
+    {
+      name: 'Set branch upstream',
+      implemented: true,
+      description: 'Set or remove the upstream branch used for pull, push, and ahead or behind counts.',
+    },
+    {
+      name: 'Merge branches',
+      implemented: true,
+      description: 'Merge another revision into the current branch and continue or abort after conflicts.',
+    },
+    {
+      name: 'Rebase branches',
+      implemented: true,
+      description: 'Rebase commits onto another revision and continue or abort after conflicts.',
+    },
+    {
+      name: 'Manage tags',
+      implemented: true,
+      description: 'Create, list, checkout, and delete lightweight or annotated tags.',
+    },
+    {
+      name: 'Cherry-pick commits',
+      implemented: true,
+      description: 'Apply a selected commit onto the current branch.',
+    },
+    {
+      name: 'Revert commits',
+      implemented: true,
+      description: 'Create changes that undo a selected commit.',
+    },
+    {
+      name: 'Reset revisions',
+      implemented: true,
+      description: 'Reset with soft, mixed, or hard mode to a selected revision.',
+    },
+    {
+      name: 'Apply patches',
+      implemented: true,
+      description: 'Apply a Git patch to the current repository.',
+    },
+    {
+      name: 'Stash changes',
+      implemented: true,
+      description: 'Save, apply, pop, and drop stashes. Stashes can include untracked files and staged state.',
+    },
+    {
+      name: 'Resolve conflicts',
+      implemented: true,
+      description: 'Resolve index conflicts with ours, theirs, or the current working file before continuing.',
+    },
+    {
+      name: 'Resume interrupted operations',
+      implemented: true,
+      description: 'Merge, rebase, cherry-pick, and revert state survives an app relaunch.',
+    },
+    {
+      name: 'Manage remotes',
+      implemented: true,
+      description: 'Add, edit, rename, and remove remotes. Fetch and push URLs can differ.',
+    },
+    {
+      name: 'Fetch',
+      implemented: true,
+      description: 'Download remote refs and objects without changing the current branch.',
+    },
+    {
+      name: 'Prune remote branches',
+      implemented: true,
+      description: 'Remove remote-tracking references that no longer exist on the remote.',
+    },
+    {
+      name: 'Pull',
+      implemented: true,
+      description: 'Fast-forward the current branch from its configured upstream.',
+    },
+    {
+      name: 'Push',
+      implemented: true,
+      description: 'Push branches, tags, deletions, or arbitrary refspecs to a remote.',
+    },
+    {
+      name: 'Ahead and behind counts',
+      implemented: true,
+      description: 'See how many commits a branch is ahead of or behind its upstream.',
+    },
+    {
+      name: 'Update submodules',
+      implemented: true,
+      description: 'Find declared submodules and initialize or update them with authentication when needed.',
+    },
+    {
+      name: 'Keychain credentials',
+      implemented: true,
+      description: 'Store Git credentials in the iOS Keychain instead of the project file.',
+    },
+    {
+      name: 'SSH remotes',
+      implemented: false,
+      description: 'Network remotes use HTTPS. The embedded Git library does not include an SSH implementation.',
+    },
+    {
+      name: 'Git hooks',
+      implemented: false,
+      description: 'cppMax does not run repository hooks because they execute repository-provided programs.',
+    },
+    {
+      name: 'External Git helpers',
+      implemented: false,
+      description: 'External credential helpers, diff drivers, merge drivers, shell transports, and executable filters cannot run inside the app sandbox.',
+    },
+    {
+      name: 'Multiple worktrees',
+      implemented: false,
+      description: 'Each cppMax project currently manages one Git worktree.',
+    },
+    {
+      name: 'Signed commits and tags',
+      implemented: false,
+      description: 'cppMax does not currently create OpenPGP-signed commits or tags.',
+    },
+  ],
+},
   {
     id: 'cmake',
     label: 'CMake',
@@ -81,12 +255,12 @@ const categories = [
         </label>
 
         <nav class="category-list" aria-label="Feature categories">
-          <button class="category-button active" type="button" data-category="all" aria-pressed="true">
+          <button class="category-button active" type="button" data-category-button data-category="all" aria-pressed="true">
             <span>All features</span>
             <span class="category-total">{categories.reduce((total, category) => total + category.features.length, 0)}</span>
           </button>
           {categories.map((category) => (
-            <button class={`category-button ${category.tone}`} type="button" data-category={category.id} aria-pressed="false">
+            <button class={`category-button ${category.tone}`} type="button" data-category-button data-category={category.id} aria-pressed="false">
               <span>{category.label}</span>
               <span class="category-counts" aria-label={`${category.implemented} implemented and ${category.unimplemented} unimplemented`}>
                 <span>✅ {category.implemented}</span><span>❌ {category.unimplemented}</span>
@@ -117,6 +291,22 @@ const categories = [
               <span class="category-label">{category.label}</span>
             </article>
           ))) }
+
+          {categories.map((category) => (
+            <button
+              class="feature-card category-match-card"
+              type="button"
+              data-category-match-card={category.id}
+              data-category-label={category.label}
+              hidden
+            >
+              <div class="card-heading">
+                <h3 data-category-match-title></h3>
+              </div>
+              <p data-category-match-description></p>
+              <span class="category-label">{category.label}</span>
+            </button>
+          ))}
         </div>
         <p class="no-results" data-no-results hidden>No features match that search.</p>
       </div>
@@ -125,44 +315,103 @@ const categories = [
 </Layout>
 
 <script>
-  const search = document.querySelector<HTMLInputElement>('[data-feature-search]');
-  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-category]')];
-  const cards = [...document.querySelectorAll<HTMLElement>('[data-feature-card]')];
-  const title = document.querySelector<HTMLElement>('[data-results-title]');
-  const count = document.querySelector<HTMLElement>('[data-results-count]');
-  const noResults = document.querySelector<HTMLElement>('[data-no-results]');
-  let selectedCategory = 'all';
+  const browser = document.querySelector<HTMLElement>('[data-feature-grid]')?.closest('.feature-browser');
+  const search = browser?.querySelector<HTMLInputElement>('[data-feature-search]');
+  const buttons = [...(browser?.querySelectorAll<HTMLButtonElement>('[data-category-button]') ?? [])];
+  const cards = [...(browser?.querySelectorAll<HTMLElement>('[data-feature-card]') ?? [])];
+  const matchCards = [...(browser?.querySelectorAll<HTMLButtonElement>('[data-category-match-card]') ?? [])];
+  const title = browser?.querySelector<HTMLElement>('[data-results-title]');
+  const count = browser?.querySelector<HTMLElement>('[data-results-count]');
+  const noResults = browser?.querySelector<HTMLElement>('[data-no-results]');
+  let selectedCategory = buttons.find((button) => button.classList.contains('active'))?.dataset.category ?? 'all';
+
+  const getCategoryLabel = (categoryId: string) => {
+    const button = buttons.find((item) => item.dataset.category === categoryId);
+    return button?.querySelector('span')?.textContent?.trim() ?? categoryId;
+  };
 
   const updateResults = () => {
-    const query = search?.value.trim().toLowerCase() ?? '';
+    const rawQuery = search?.value.trim() ?? '';
+    const query = rawQuery.toLowerCase();
+    const matchesByCategory = new Map<string, number>();
     let visible = 0;
 
     cards.forEach((card) => {
-      const matchesCategory = selectedCategory === 'all' || card.dataset.category === selectedCategory;
-      const matchesSearch = !query || card.dataset.search?.includes(query);
+      const categoryId = card.dataset.category ?? '';
+      const matchesSearch = !query || Boolean(card.dataset.search?.includes(query));
+
+      if (query && matchesSearch && categoryId) {
+        matchesByCategory.set(categoryId, (matchesByCategory.get(categoryId) ?? 0) + 1);
+      }
+
+      const matchesCategory = selectedCategory === 'all' || categoryId === selectedCategory;
       const show = Boolean(matchesCategory && matchesSearch);
       card.hidden = !show;
       if (show) visible += 1;
     });
 
+    let visibleMatchCards = 0;
+
+    matchCards.forEach((card) => {
+      const categoryId = card.dataset.categoryMatchCard ?? '';
+      const matches = matchesByCategory.get(categoryId) ?? 0;
+      const show = Boolean(
+        query &&
+        selectedCategory !== 'all' &&
+        categoryId !== selectedCategory &&
+        matches > 0
+      );
+
+      card.hidden = !show;
+      if (!show) return;
+
+      visibleMatchCards += 1;
+      const label = card.dataset.categoryLabel ?? getCategoryLabel(categoryId);
+      const matchTitle = card.querySelector<HTMLElement>('[data-category-match-title]');
+      const matchDescription = card.querySelector<HTMLElement>('[data-category-match-description]');
+
+      if (matchTitle) {
+        matchTitle.textContent = `${matches} ${matches === 1 ? 'match' : 'matches'} in ${label}`;
+      }
+      if (matchDescription) {
+        matchDescription.textContent = `Show ${label} results for “${rawQuery}”.`;
+      }
+      card.setAttribute('aria-label', `Show ${matches} ${matches === 1 ? 'match' : 'matches'} in ${label} for ${rawQuery}`);
+    });
+
     if (count) count.textContent = `${visible} ${visible === 1 ? 'item' : 'items'}`;
-    if (noResults) noResults.hidden = visible !== 0;
+    if (noResults) noResults.hidden = visible !== 0 || visibleMatchCards !== 0;
+  };
+
+  const selectCategory = (categoryId: string) => {
+    selectedCategory = categoryId;
+
+    buttons.forEach((button) => {
+      const active = button.dataset.category === categoryId;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active.toString());
+    });
+
+    if (title) title.textContent = getCategoryLabel(categoryId);
+    updateResults();
   };
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
-      selectedCategory = button.dataset.category ?? 'all';
-      buttons.forEach((item) => {
-        const active = item === button;
-        item.classList.toggle('active', active);
-        item.setAttribute('aria-pressed', active.toString());
-      });
-      if (title) title.textContent = button.querySelector('span')?.textContent ?? 'All features';
-      updateResults();
+      selectCategory(button.dataset.category ?? 'all');
+    });
+  });
+
+  matchCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const categoryId = card.dataset.categoryMatchCard;
+      if (categoryId) selectCategory(categoryId);
     });
   });
 
   search?.addEventListener('input', updateResults);
+  search?.addEventListener('search', updateResults);
+  updateResults();
 </script>
 
 <style>
@@ -252,6 +501,19 @@ const categories = [
   .feature-status { font-size: 1rem; }
   .feature-card p { margin: 18px 0 30px; color: #b7b8bc; font-size: .93rem; line-height: 1.55; }
   .category-label { margin-top: auto; color: #888a8f; font: 650 .68rem/1 ui-monospace, monospace; text-transform: uppercase; }
+  .category-match-card {
+    appearance: none;
+    width: 100%;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .category-match-card:hover { border-color: #797b80; }
+  .category-match-card:focus-visible {
+    outline: 2px solid #f5f5f7;
+    outline-offset: 3px;
+  }
   .no-results { padding: 64px 24px; border: 1px dashed #55575b; border-radius: 20px; color: #b7b8bc; text-align: center; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
